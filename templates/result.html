@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATS Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+
+<div class="result-container">
+
+    <h1>AI Resume Screening Result</h1>
+
+    <!-- ATS Score -->
+    <div class="score-card">
+        <div class="circle" style="--score: {{ score }};">
+            <div class="inner">{{ score }}%</div>
+        </div>
+
+        <h2 class="rating">🟢 {{ rating }}</h2>
+    </div>
+    <div class="decision-card">
+    <h3>🎯 Recruiter Summary</h3>
+    <p><b>Decision:</b> {{ decision }}</p>
+</div>
+
+    <!-- Candidate Details -->
+    <div class="candidate-card">
+        <h2>👤 Candidate Details</h2>
+
+        <p><b>Name:</b> {{ name }}</p>
+        <p><b>Email:</b> {{ email }}</p>
+        <p><b>Phone:</b> {{ phone }}</p>
+    </div>
+
+    <!-- Skills -->
+    <div class="skills-section">
+
+        <div class="matched">
+            <h2>✅ Matched Skills</h2>
+
+            {% if matched %}
+                <ul>
+                    {% for skill in matched %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No matched skills.</p>
+            {% endif %}
+        </div>
+
+        <div class="missing">
+            <h2>❌ Missing Skills</h2>
+
+            {% if missing %}
+                <ul>
+                    {% for skill in missing %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="color:green;"><b>No missing skills 🎉</b></p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- Suggestions -->
+    <div class="matched" style="margin-top:25px;">
+        <h2>💡 Improvement Suggestions</h2>
+
+        <ul>
+            {% for item in suggestions %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Buttons -->
+    <div style="text-align:center; margin-top:30px;">
+
+        <a href="{{ url_for('download_pdf') }}">
+            <button>📄 Download PDF Report</button>
+        </a>
+
+        <br><br>
+
+        <a href="{{ url_for('upload') }}">
+            <button>🔄 Analyze Another Resume</button>
+        </a>
+
+    </div>
+
+</div>>
+
+</body>
+</html>

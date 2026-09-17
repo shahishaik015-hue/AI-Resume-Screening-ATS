@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume ATS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="upload-container">
+
+    <h1>🤖 AI Resume Screening & ATS</h1>
+    <p class="subtitle">
+        Upload one or more resumes and rank candidates using ATS.
+    </p>
+
+    <form action="/analyze" method="POST" enctype="multipart/form-data">
+
+        <div class="upload-box">
+
+            <h2>📄 Upload Resume(s)</h2>
+
+            <input
+                type="file"
+                id="resume"
+                name="resume"
+                accept=".pdf,.docx"
+                multiple
+                required>
+
+            <p id="fileCount">No files selected</p>
+
+            <small>Supported: PDF & DOCX</small>
+
+        </div>
+
+        <label><b>💼 Job Description</b></label>
+
+        <textarea
+            name="job_description"
+            rows="8"
+            placeholder="Paste the company job description here..."
+            required></textarea>
+
+        <button type="submit" class="analyze-btn">
+            🚀 Analyze Resume
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+const input = document.getElementById("resume");
+const fileCount = document.getElementById("fileCount");
+
+input.addEventListener("change", () => {
+    if(input.files.length === 0){
+        fileCount.textContent = "No files selected";
+    }else if(input.files.length === 1){
+        fileCount.textContent = input.files[0].name;
+    }else{
+        fileCount.textContent = `${input.files.length} resumes selected`;
+    }
+});
+</script>
+
+</body>
+</html>

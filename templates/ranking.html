@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Candidate Ranking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="result-container">
+
+    <h1>🏆 Candidate Ranking</h1>
+    <p style="text-align:center;color:gray;">
+        Highest ATS Score appears first
+    </p>
+
+    <table class="rank-table">
+        <tr>
+            <th>Rank</th>
+            <th>Candidate</th>
+            <th>ATS Score</th>
+            <th>Decision</th>
+        </tr>
+
+        {% for r in results %}
+        <tr>
+            <td>
+                {% if loop.index == 1 %}🥇
+                {% elif loop.index == 2 %}🥈
+                {% elif loop.index == 3 %}🥉
+                {% else %}{{ loop.index }}
+                {% endif %}
+            </td>
+
+            <td>{{ r.name }}</td>
+            <td><b>{{ r.score }}%</b></td>
+            <td>{{ r.decision }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <div style="text-align:center;margin-top:30px;">
+        <a href="/upload">
+            <button>🔄 Analyze More Resumes</button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
